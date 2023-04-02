@@ -95,9 +95,10 @@ def beamsearch(image, beam_width = 2):
     
     return rep, score
 
-@app.route("/")
+@app.route("/hello",methods=["GET"])
 def hello():
-    return "Hello Boss I am working from backend!"
+    if request.method=="GET":
+        return "Hello Boss I am working from backend!"
 @app.route("/double",methods=["POST"])
 def model_double():
     if request.method=="POST":
