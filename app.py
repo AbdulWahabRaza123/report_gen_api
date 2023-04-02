@@ -37,6 +37,7 @@ decoder_model = tf.keras.models.load_model('./report_decoder_model.h5')
 y_train = train_data['Report']
 tokenizer = Tokenizer(filters='!"#$%&()*+,-/:;<=>?@[\\]^_`{|}~\t\n')
 tokenizer.fit_on_texts(y_train.values)
+
 def beamsearch(image, beam_width = 2):
     
     start = [tokenizer.word_index['startseq']]
@@ -94,7 +95,9 @@ def beamsearch(image, beam_width = 2):
     
     return rep, score
 
-
+@app.route("/")
+def hello():
+    return "Hello Boss I am working from backend!"
 @app.route("/double",methods=["POST"])
 def model_double():
     if request.method=="POST":
