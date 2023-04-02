@@ -1,6 +1,5 @@
 from flask import Flask,request,jsonify
 app = Flask(__name__)
-from tensorflow.python.tools import module_util as _module_util
 from tensorflow.keras.applications import densenet
 from tensorflow.keras.applications.densenet import preprocess_input
 from tensorflow.keras.models import Model
@@ -9,7 +8,6 @@ import pandas as pd
 import tensorflow as tf
 from PIL import Image
 from skimage.transform import resize
-import seaborn as sns
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
