@@ -12,6 +12,9 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.layers import Dense, LSTM, Input, Embedding, Conv2D, Concatenate, Flatten, Add, Dropout, GRU
+from flask_cors import CORS
+from flask_cors import cross_origin
+
 train_data = pd.read_csv('./Final_Train_Data.csv')
 test_data = pd.read_csv('./Final_Test_Data.csv')
 cv_data = pd.read_csv('./Final_CV_Data.csv')
@@ -98,6 +101,7 @@ def hello():
     if request.method=="GET":
         return "Hello Boss I am working from backend!"
 @app.route("/double",methods=["POST"])
+@cross_origin()
 def model_double():
     if request.method=="POST":
         try:
@@ -130,8 +134,10 @@ def model_double():
         except:
             return jsonify({"message":"error"}),400
 @app.route("/single",methods=["POST"])
+@cross_origin()
 def model_single():
     if request.method=="POST":
+        print("I am entring...")
         try:
             i1=request.files["img1"]
             i1.save('temp1.jpg')
@@ -152,4 +158,9 @@ def model_single():
             return jsonify({"message":"error"}),400
 
 if __name__ == "__main__":
+    cors = CORS(app, resources={
+    r"/*": {
+        "origins": "http://localhost:3000"
+    }
+})
     app.run(debug=True)
